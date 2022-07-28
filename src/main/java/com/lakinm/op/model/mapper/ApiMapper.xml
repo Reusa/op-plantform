@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lakinm.op.model.mapper.ApiMapper" >
+  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.Api" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="module_id" property="moduleId" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="protocol" property="protocol" jdbcType="VARCHAR" />
+    <result column="domain_sign" property="domainSign" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.lakinm.op.model.entity.ApiWithBLOBs" extends="BaseResultMap" >
+    <result column="header" property="header" jdbcType="LONGVARCHAR" />
+    <result column="body" property="body" jdbcType="LONGVARCHAR" />
+    <result column="query" property="query" jdbcType="LONGVARCHAR" />
+    <result column="rest" property="rest" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, num, name, level, module_id, project_id, method, path, protocol, domain_sign, 
+    description, update_user, create_user, create_time, update_time, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    header, body, query, rest
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from api
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from api
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lakinm.op.model.entity.ApiWithBLOBs" >
+    insert into api (id, num, name, 
+      level, module_id, project_id, 
+      method, path, protocol, 
+      domain_sign, description, update_user, 
+      create_user, create_time, update_time, 
+      status, header, body, 
+      query, rest)
+    values (#{id,jdbcType=VARCHAR}, #{num,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{level,jdbcType=VARCHAR}, #{moduleId,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{protocol,jdbcType=VARCHAR}, 
+      #{domainSign,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{status,jdbcType=VARCHAR}, #{header,jdbcType=LONGVARCHAR}, #{body,jdbcType=LONGVARCHAR}, 
+      #{query,jdbcType=LONGVARCHAR}, #{rest,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.ApiWithBLOBs" >
+    insert into api
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="moduleId != null" >
+        module_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="method != null" >
+        method,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="protocol != null" >
+        protocol,
+      </if>
+      <if test="domainSign != null" >
+        domain_sign,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="header != null" >
+        header,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+      <if test="query != null" >
+        query,
+      </if>
+      <if test="rest != null" >
+        rest,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null" >
+        #{moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="protocol != null" >
+        #{protocol,jdbcType=VARCHAR},
+      </if>
+      <if test="domainSign != null" >
+        #{domainSign,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="header != null" >
+        #{header,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="query != null" >
+        #{query,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="rest != null" >
+        #{rest,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.ApiWithBLOBs" >
+    update api
+    <set >
+      <if test="num != null" >
+        num = #{num,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null" >
+        module_id = #{moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="protocol != null" >
+        protocol = #{protocol,jdbcType=VARCHAR},
+      </if>
+      <if test="domainSign != null" >
+        domain_sign = #{domainSign,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="header != null" >
+        header = #{header,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="query != null" >
+        query = #{query,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="rest != null" >
+        rest = #{rest,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lakinm.op.model.entity.ApiWithBLOBs" >
+    update api
+    set num = #{num,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      module_id = #{moduleId,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      protocol = #{protocol,jdbcType=VARCHAR},
+      domain_sign = #{domainSign,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      status = #{status,jdbcType=VARCHAR},
+      header = #{header,jdbcType=LONGVARCHAR},
+      body = #{body,jdbcType=LONGVARCHAR},
+      query = #{query,jdbcType=LONGVARCHAR},
+      rest = #{rest,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.Api" >
+    update api
+    set num = #{num,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      module_id = #{moduleId,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      protocol = #{protocol,jdbcType=VARCHAR},
+      domain_sign = #{domainSign,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

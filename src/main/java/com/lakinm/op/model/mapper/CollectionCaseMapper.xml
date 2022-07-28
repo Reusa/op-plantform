@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lakinm.op.model.mapper.CollectionCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.CollectionCase" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="index" property="index" jdbcType="INTEGER" />
+    <result column="collection_id" property="collectionId" jdbcType="VARCHAR" />
+    <result column="case_id" property="caseId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, index, collection_id, case_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from collection_case
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from collection_case
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lakinm.op.model.entity.CollectionCase" >
+    insert into collection_case (id, index, collection_id, 
+      case_id)
+    values (#{id,jdbcType=VARCHAR}, #{index,jdbcType=INTEGER}, #{collectionId,jdbcType=VARCHAR}, 
+      #{caseId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.CollectionCase" >
+    insert into collection_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="index != null" >
+        index,
+      </if>
+      <if test="collectionId != null" >
+        collection_id,
+      </if>
+      <if test="caseId != null" >
+        case_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="index != null" >
+        #{index,jdbcType=INTEGER},
+      </if>
+      <if test="collectionId != null" >
+        #{collectionId,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null" >
+        #{caseId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.CollectionCase" >
+    update collection_case
+    <set >
+      <if test="index != null" >
+        index = #{index,jdbcType=INTEGER},
+      </if>
+      <if test="collectionId != null" >
+        collection_id = #{collectionId,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.CollectionCase" >
+    update collection_case
+    set index = #{index,jdbcType=INTEGER},
+      collection_id = #{collectionId,jdbcType=VARCHAR},
+      case_id = #{caseId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

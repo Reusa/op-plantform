@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lakinm.op.model.mapper.SumStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.SumStatistics" >
+    <id column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="api_case_total" property="apiCaseTotal" jdbcType="INTEGER" />
+    <result column="api_case_new_week" property="apiCaseNewWeek" jdbcType="INTEGER" />
+    <result column="web_case_total" property="webCaseTotal" jdbcType="INTEGER" />
+    <result column="web_case_new_week" property="webCaseNewWeek" jdbcType="INTEGER" />
+    <result column="plan_run_total" property="planRunTotal" jdbcType="INTEGER" />
+    <result column="plan_run_today" property="planRunToday" jdbcType="INTEGER" />
+    <result column="case_run_total" property="caseRunTotal" jdbcType="INTEGER" />
+    <result column="case_run_today" property="caseRunToday" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.lakinm.op.model.entity.SumStatisticsWithBLOBs" extends="BaseResultMap" >
+    <result column="plan_run_week_top" property="planRunWeekTop" jdbcType="LONGVARCHAR" />
+    <result column="case_fail_week_top" property="caseFailWeekTop" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    project_id, id, api_case_total, api_case_new_week, web_case_total, web_case_new_week, 
+    plan_run_total, plan_run_today, case_run_total, case_run_today
+  </sql>
+  <sql id="Blob_Column_List" >
+    plan_run_week_top, case_fail_week_top
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sum_statistics
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sum_statistics
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lakinm.op.model.entity.SumStatisticsWithBLOBs" >
+    insert into sum_statistics (project_id, id, api_case_total, 
+      api_case_new_week, web_case_total, web_case_new_week, 
+      plan_run_total, plan_run_today, case_run_total, 
+      case_run_today, plan_run_week_top, case_fail_week_top
+      )
+    values (#{projectId,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{apiCaseTotal,jdbcType=INTEGER}, 
+      #{apiCaseNewWeek,jdbcType=INTEGER}, #{webCaseTotal,jdbcType=INTEGER}, #{webCaseNewWeek,jdbcType=INTEGER}, 
+      #{planRunTotal,jdbcType=INTEGER}, #{planRunToday,jdbcType=INTEGER}, #{caseRunTotal,jdbcType=INTEGER}, 
+      #{caseRunToday,jdbcType=INTEGER}, #{planRunWeekTop,jdbcType=LONGVARCHAR}, #{caseFailWeekTop,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.SumStatisticsWithBLOBs" >
+    insert into sum_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="apiCaseTotal != null" >
+        api_case_total,
+      </if>
+      <if test="apiCaseNewWeek != null" >
+        api_case_new_week,
+      </if>
+      <if test="webCaseTotal != null" >
+        web_case_total,
+      </if>
+      <if test="webCaseNewWeek != null" >
+        web_case_new_week,
+      </if>
+      <if test="planRunTotal != null" >
+        plan_run_total,
+      </if>
+      <if test="planRunToday != null" >
+        plan_run_today,
+      </if>
+      <if test="caseRunTotal != null" >
+        case_run_total,
+      </if>
+      <if test="caseRunToday != null" >
+        case_run_today,
+      </if>
+      <if test="planRunWeekTop != null" >
+        plan_run_week_top,
+      </if>
+      <if test="caseFailWeekTop != null" >
+        case_fail_week_top,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="apiCaseTotal != null" >
+        #{apiCaseTotal,jdbcType=INTEGER},
+      </if>
+      <if test="apiCaseNewWeek != null" >
+        #{apiCaseNewWeek,jdbcType=INTEGER},
+      </if>
+      <if test="webCaseTotal != null" >
+        #{webCaseTotal,jdbcType=INTEGER},
+      </if>
+      <if test="webCaseNewWeek != null" >
+        #{webCaseNewWeek,jdbcType=INTEGER},
+      </if>
+      <if test="planRunTotal != null" >
+        #{planRunTotal,jdbcType=INTEGER},
+      </if>
+      <if test="planRunToday != null" >
+        #{planRunToday,jdbcType=INTEGER},
+      </if>
+      <if test="caseRunTotal != null" >
+        #{caseRunTotal,jdbcType=INTEGER},
+      </if>
+      <if test="caseRunToday != null" >
+        #{caseRunToday,jdbcType=INTEGER},
+      </if>
+      <if test="planRunWeekTop != null" >
+        #{planRunWeekTop,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseFailWeekTop != null" >
+        #{caseFailWeekTop,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.SumStatisticsWithBLOBs" >
+    update sum_statistics
+    <set >
+      <if test="id != null" >
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="apiCaseTotal != null" >
+        api_case_total = #{apiCaseTotal,jdbcType=INTEGER},
+      </if>
+      <if test="apiCaseNewWeek != null" >
+        api_case_new_week = #{apiCaseNewWeek,jdbcType=INTEGER},
+      </if>
+      <if test="webCaseTotal != null" >
+        web_case_total = #{webCaseTotal,jdbcType=INTEGER},
+      </if>
+      <if test="webCaseNewWeek != null" >
+        web_case_new_week = #{webCaseNewWeek,jdbcType=INTEGER},
+      </if>
+      <if test="planRunTotal != null" >
+        plan_run_total = #{planRunTotal,jdbcType=INTEGER},
+      </if>
+      <if test="planRunToday != null" >
+        plan_run_today = #{planRunToday,jdbcType=INTEGER},
+      </if>
+      <if test="caseRunTotal != null" >
+        case_run_total = #{caseRunTotal,jdbcType=INTEGER},
+      </if>
+      <if test="caseRunToday != null" >
+        case_run_today = #{caseRunToday,jdbcType=INTEGER},
+      </if>
+      <if test="planRunWeekTop != null" >
+        plan_run_week_top = #{planRunWeekTop,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseFailWeekTop != null" >
+        case_fail_week_top = #{caseFailWeekTop,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lakinm.op.model.entity.SumStatisticsWithBLOBs" >
+    update sum_statistics
+    set id = #{id,jdbcType=VARCHAR},
+      api_case_total = #{apiCaseTotal,jdbcType=INTEGER},
+      api_case_new_week = #{apiCaseNewWeek,jdbcType=INTEGER},
+      web_case_total = #{webCaseTotal,jdbcType=INTEGER},
+      web_case_new_week = #{webCaseNewWeek,jdbcType=INTEGER},
+      plan_run_total = #{planRunTotal,jdbcType=INTEGER},
+      plan_run_today = #{planRunToday,jdbcType=INTEGER},
+      case_run_total = #{caseRunTotal,jdbcType=INTEGER},
+      case_run_today = #{caseRunToday,jdbcType=INTEGER},
+      plan_run_week_top = #{planRunWeekTop,jdbcType=LONGVARCHAR},
+      case_fail_week_top = #{caseFailWeekTop,jdbcType=LONGVARCHAR}
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.SumStatistics" >
+    update sum_statistics
+    set id = #{id,jdbcType=VARCHAR},
+      api_case_total = #{apiCaseTotal,jdbcType=INTEGER},
+      api_case_new_week = #{apiCaseNewWeek,jdbcType=INTEGER},
+      web_case_total = #{webCaseTotal,jdbcType=INTEGER},
+      web_case_new_week = #{webCaseNewWeek,jdbcType=INTEGER},
+      plan_run_total = #{planRunTotal,jdbcType=INTEGER},
+      plan_run_today = #{planRunToday,jdbcType=INTEGER},
+      case_run_total = #{caseRunTotal,jdbcType=INTEGER},
+      case_run_today = #{caseRunToday,jdbcType=INTEGER}
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lakinm.op.model.mapper.ReportCollectionCaseWebMapper" >
+  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.ReportCollectionCaseWeb" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="report_collection_case_id" property="reportCollectionCaseId" jdbcType="VARCHAR" />
+    <result column="case_web_index" property="caseWebIndex" jdbcType="INTEGER" />
+    <result column="operation_id" property="operationId" jdbcType="VARCHAR" />
+    <result column="operation_name" property="operationName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.lakinm.op.model.entity.ReportCollectionCaseWebWithBLOBs" extends="BaseResultMap" >
+    <result column="operation_element" property="operationElement" jdbcType="LONGVARCHAR" />
+    <result column="screen_shot" property="screenShot" jdbcType="LONGVARCHAR" />
+    <result column="exec_log" property="execLog" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, report_collection_case_id, case_web_index, operation_id, operation_name, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    operation_element, screen_shot, exec_log
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from report_collection_case_web
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from report_collection_case_web
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lakinm.op.model.entity.ReportCollectionCaseWebWithBLOBs" >
+    insert into report_collection_case_web (id, report_collection_case_id, case_web_index, 
+      operation_id, operation_name, status, 
+      operation_element, screen_shot, exec_log
+      )
+    values (#{id,jdbcType=VARCHAR}, #{reportCollectionCaseId,jdbcType=VARCHAR}, #{caseWebIndex,jdbcType=INTEGER}, 
+      #{operationId,jdbcType=VARCHAR}, #{operationName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{operationElement,jdbcType=LONGVARCHAR}, #{screenShot,jdbcType=LONGVARCHAR}, #{execLog,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.ReportCollectionCaseWebWithBLOBs" >
+    insert into report_collection_case_web
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="reportCollectionCaseId != null" >
+        report_collection_case_id,
+      </if>
+      <if test="caseWebIndex != null" >
+        case_web_index,
+      </if>
+      <if test="operationId != null" >
+        operation_id,
+      </if>
+      <if test="operationName != null" >
+        operation_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="operationElement != null" >
+        operation_element,
+      </if>
+      <if test="screenShot != null" >
+        screen_shot,
+      </if>
+      <if test="execLog != null" >
+        exec_log,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="reportCollectionCaseId != null" >
+        #{reportCollectionCaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="caseWebIndex != null" >
+        #{caseWebIndex,jdbcType=INTEGER},
+      </if>
+      <if test="operationId != null" >
+        #{operationId,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null" >
+        #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="operationElement != null" >
+        #{operationElement,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="screenShot != null" >
+        #{screenShot,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="execLog != null" >
+        #{execLog,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.ReportCollectionCaseWebWithBLOBs" >
+    update report_collection_case_web
+    <set >
+      <if test="reportCollectionCaseId != null" >
+        report_collection_case_id = #{reportCollectionCaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="caseWebIndex != null" >
+        case_web_index = #{caseWebIndex,jdbcType=INTEGER},
+      </if>
+      <if test="operationId != null" >
+        operation_id = #{operationId,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null" >
+        operation_name = #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="operationElement != null" >
+        operation_element = #{operationElement,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="screenShot != null" >
+        screen_shot = #{screenShot,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="execLog != null" >
+        exec_log = #{execLog,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lakinm.op.model.entity.ReportCollectionCaseWebWithBLOBs" >
+    update report_collection_case_web
+    set report_collection_case_id = #{reportCollectionCaseId,jdbcType=VARCHAR},
+      case_web_index = #{caseWebIndex,jdbcType=INTEGER},
+      operation_id = #{operationId,jdbcType=VARCHAR},
+      operation_name = #{operationName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      operation_element = #{operationElement,jdbcType=LONGVARCHAR},
+      screen_shot = #{screenShot,jdbcType=LONGVARCHAR},
+      exec_log = #{execLog,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.ReportCollectionCaseWeb" >
+    update report_collection_case_web
+    set report_collection_case_id = #{reportCollectionCaseId,jdbcType=VARCHAR},
+      case_web_index = #{caseWebIndex,jdbcType=INTEGER},
+      operation_id = #{operationId,jdbcType=VARCHAR},
+      operation_name = #{operationName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

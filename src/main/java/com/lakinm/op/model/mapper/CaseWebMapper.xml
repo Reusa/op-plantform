@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lakinm.op.model.mapper.CaseWebMapper" >
+  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.CaseWeb" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="index" property="index" jdbcType="INTEGER" />
+    <result column="case_id" property="caseId" jdbcType="VARCHAR" />
+    <result column="operation_id" property="operationId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.lakinm.op.model.entity.CaseWebWithBLOBs" extends="BaseResultMap" >
+    <result column="element" property="element" jdbcType="LONGVARCHAR" />
+    <result column="data" property="data" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, index, case_id, operation_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    element, data
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from case_web
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from case_web
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lakinm.op.model.entity.CaseWebWithBLOBs" >
+    insert into case_web (id, index, case_id, 
+      operation_id, element, data
+      )
+    values (#{id,jdbcType=VARCHAR}, #{index,jdbcType=INTEGER}, #{caseId,jdbcType=VARCHAR}, 
+      #{operationId,jdbcType=VARCHAR}, #{element,jdbcType=LONGVARCHAR}, #{data,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.CaseWebWithBLOBs" >
+    insert into case_web
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="index != null" >
+        index,
+      </if>
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="operationId != null" >
+        operation_id,
+      </if>
+      <if test="element != null" >
+        element,
+      </if>
+      <if test="data != null" >
+        data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="index != null" >
+        #{index,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null" >
+        #{caseId,jdbcType=VARCHAR},
+      </if>
+      <if test="operationId != null" >
+        #{operationId,jdbcType=VARCHAR},
+      </if>
+      <if test="element != null" >
+        #{element,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.CaseWebWithBLOBs" >
+    update case_web
+    <set >
+      <if test="index != null" >
+        index = #{index,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=VARCHAR},
+      </if>
+      <if test="operationId != null" >
+        operation_id = #{operationId,jdbcType=VARCHAR},
+      </if>
+      <if test="element != null" >
+        element = #{element,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="data != null" >
+        data = #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lakinm.op.model.entity.CaseWebWithBLOBs" >
+    update case_web
+    set index = #{index,jdbcType=INTEGER},
+      case_id = #{caseId,jdbcType=VARCHAR},
+      operation_id = #{operationId,jdbcType=VARCHAR},
+      element = #{element,jdbcType=LONGVARCHAR},
+      data = #{data,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.CaseWeb" >
+    update case_web
+    set index = #{index,jdbcType=INTEGER},
+      case_id = #{caseId,jdbcType=VARCHAR},
+      operation_id = #{operationId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lakinm.op.model.mapper.DailyStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.DailyStatistics" >
+    <id column="stat_date" property="statDate" jdbcType="DATE" />
+    <id column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="api_case_new" property="apiCaseNew" jdbcType="INTEGER" />
+    <result column="web_case_new" property="webCaseNew" jdbcType="INTEGER" />
+    <result column="api_case_sum" property="apiCaseSum" jdbcType="INTEGER" />
+    <result column="web_case_sum" property="webCaseSum" jdbcType="INTEGER" />
+    <result column="api_case_run" property="apiCaseRun" jdbcType="INTEGER" />
+    <result column="web_case_run" property="webCaseRun" jdbcType="INTEGER" />
+    <result column="api_case_pass_rate" property="apiCasePassRate" jdbcType="REAL" />
+    <result column="web_case_pass_rate" property="webCasePassRate" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    stat_date, project_id, id, api_case_new, web_case_new, api_case_sum, web_case_sum, 
+    api_case_run, web_case_run, api_case_pass_rate, web_case_pass_rate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.lakinm.op.model.entity.DailyStatisticsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from daily_statistics
+    where stat_date = #{statDate,jdbcType=DATE}
+      and project_id = #{projectId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.lakinm.op.model.entity.DailyStatisticsKey" >
+    delete from daily_statistics
+    where stat_date = #{statDate,jdbcType=DATE}
+      and project_id = #{projectId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lakinm.op.model.entity.DailyStatistics" >
+    insert into daily_statistics (stat_date, project_id, id, 
+      api_case_new, web_case_new, api_case_sum, 
+      web_case_sum, api_case_run, web_case_run, 
+      api_case_pass_rate, web_case_pass_rate)
+    values (#{statDate,jdbcType=DATE}, #{projectId,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, 
+      #{apiCaseNew,jdbcType=INTEGER}, #{webCaseNew,jdbcType=INTEGER}, #{apiCaseSum,jdbcType=INTEGER}, 
+      #{webCaseSum,jdbcType=INTEGER}, #{apiCaseRun,jdbcType=INTEGER}, #{webCaseRun,jdbcType=INTEGER}, 
+      #{apiCasePassRate,jdbcType=REAL}, #{webCasePassRate,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.DailyStatistics" >
+    insert into daily_statistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="statDate != null" >
+        stat_date,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="apiCaseNew != null" >
+        api_case_new,
+      </if>
+      <if test="webCaseNew != null" >
+        web_case_new,
+      </if>
+      <if test="apiCaseSum != null" >
+        api_case_sum,
+      </if>
+      <if test="webCaseSum != null" >
+        web_case_sum,
+      </if>
+      <if test="apiCaseRun != null" >
+        api_case_run,
+      </if>
+      <if test="webCaseRun != null" >
+        web_case_run,
+      </if>
+      <if test="apiCasePassRate != null" >
+        api_case_pass_rate,
+      </if>
+      <if test="webCasePassRate != null" >
+        web_case_pass_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="statDate != null" >
+        #{statDate,jdbcType=DATE},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="apiCaseNew != null" >
+        #{apiCaseNew,jdbcType=INTEGER},
+      </if>
+      <if test="webCaseNew != null" >
+        #{webCaseNew,jdbcType=INTEGER},
+      </if>
+      <if test="apiCaseSum != null" >
+        #{apiCaseSum,jdbcType=INTEGER},
+      </if>
+      <if test="webCaseSum != null" >
+        #{webCaseSum,jdbcType=INTEGER},
+      </if>
+      <if test="apiCaseRun != null" >
+        #{apiCaseRun,jdbcType=INTEGER},
+      </if>
+      <if test="webCaseRun != null" >
+        #{webCaseRun,jdbcType=INTEGER},
+      </if>
+      <if test="apiCasePassRate != null" >
+        #{apiCasePassRate,jdbcType=REAL},
+      </if>
+      <if test="webCasePassRate != null" >
+        #{webCasePassRate,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.DailyStatistics" >
+    update daily_statistics
+    <set >
+      <if test="id != null" >
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="apiCaseNew != null" >
+        api_case_new = #{apiCaseNew,jdbcType=INTEGER},
+      </if>
+      <if test="webCaseNew != null" >
+        web_case_new = #{webCaseNew,jdbcType=INTEGER},
+      </if>
+      <if test="apiCaseSum != null" >
+        api_case_sum = #{apiCaseSum,jdbcType=INTEGER},
+      </if>
+      <if test="webCaseSum != null" >
+        web_case_sum = #{webCaseSum,jdbcType=INTEGER},
+      </if>
+      <if test="apiCaseRun != null" >
+        api_case_run = #{apiCaseRun,jdbcType=INTEGER},
+      </if>
+      <if test="webCaseRun != null" >
+        web_case_run = #{webCaseRun,jdbcType=INTEGER},
+      </if>
+      <if test="apiCasePassRate != null" >
+        api_case_pass_rate = #{apiCasePassRate,jdbcType=REAL},
+      </if>
+      <if test="webCasePassRate != null" >
+        web_case_pass_rate = #{webCasePassRate,jdbcType=REAL},
+      </if>
+    </set>
+    where stat_date = #{statDate,jdbcType=DATE}
+      and project_id = #{projectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.DailyStatistics" >
+    update daily_statistics
+    set id = #{id,jdbcType=VARCHAR},
+      api_case_new = #{apiCaseNew,jdbcType=INTEGER},
+      web_case_new = #{webCaseNew,jdbcType=INTEGER},
+      api_case_sum = #{apiCaseSum,jdbcType=INTEGER},
+      web_case_sum = #{webCaseSum,jdbcType=INTEGER},
+      api_case_run = #{apiCaseRun,jdbcType=INTEGER},
+      web_case_run = #{webCaseRun,jdbcType=INTEGER},
+      api_case_pass_rate = #{apiCasePassRate,jdbcType=REAL},
+      web_case_pass_rate = #{webCasePassRate,jdbcType=REAL}
+    where stat_date = #{statDate,jdbcType=DATE}
+      and project_id = #{projectId,jdbcType=VARCHAR}
+  </update>
+</mapper>

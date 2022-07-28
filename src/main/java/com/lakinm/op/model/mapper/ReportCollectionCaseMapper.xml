@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lakinm.op.model.mapper.ReportCollectionCaseMapper" >
+  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.ReportCollectionCase" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="report_collection_id" property="reportCollectionId" jdbcType="VARCHAR" />
+    <result column="collection_case_index" property="collectionCaseIndex" jdbcType="INTEGER" />
+    <result column="case_id" property="caseId" jdbcType="VARCHAR" />
+    <result column="case_type" property="caseType" jdbcType="VARCHAR" />
+    <result column="case_name" property="caseName" jdbcType="VARCHAR" />
+    <result column="case_desc" property="caseDesc" jdbcType="VARCHAR" />
+    <result column="run_times" property="runTimes" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="BIGINT" />
+    <result column="end_time" property="endTime" jdbcType="BIGINT" />
+    <result column="during" property="during" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, report_collection_id, collection_case_index, case_id, case_type, case_name, case_desc, 
+    run_times, start_time, end_time, during, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from report_collection_case
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from report_collection_case
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lakinm.op.model.entity.ReportCollectionCase" >
+    insert into report_collection_case (id, report_collection_id, collection_case_index, 
+      case_id, case_type, case_name, 
+      case_desc, run_times, start_time, 
+      end_time, during, status
+      )
+    values (#{id,jdbcType=VARCHAR}, #{reportCollectionId,jdbcType=VARCHAR}, #{collectionCaseIndex,jdbcType=INTEGER}, 
+      #{caseId,jdbcType=VARCHAR}, #{caseType,jdbcType=VARCHAR}, #{caseName,jdbcType=VARCHAR}, 
+      #{caseDesc,jdbcType=VARCHAR}, #{runTimes,jdbcType=INTEGER}, #{startTime,jdbcType=BIGINT}, 
+      #{endTime,jdbcType=BIGINT}, #{during,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.ReportCollectionCase" >
+    insert into report_collection_case
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="reportCollectionId != null" >
+        report_collection_id,
+      </if>
+      <if test="collectionCaseIndex != null" >
+        collection_case_index,
+      </if>
+      <if test="caseId != null" >
+        case_id,
+      </if>
+      <if test="caseType != null" >
+        case_type,
+      </if>
+      <if test="caseName != null" >
+        case_name,
+      </if>
+      <if test="caseDesc != null" >
+        case_desc,
+      </if>
+      <if test="runTimes != null" >
+        run_times,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="during != null" >
+        during,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="reportCollectionId != null" >
+        #{reportCollectionId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionCaseIndex != null" >
+        #{collectionCaseIndex,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null" >
+        #{caseId,jdbcType=VARCHAR},
+      </if>
+      <if test="caseType != null" >
+        #{caseType,jdbcType=VARCHAR},
+      </if>
+      <if test="caseName != null" >
+        #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDesc != null" >
+        #{caseDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="runTimes != null" >
+        #{runTimes,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="during != null" >
+        #{during,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.ReportCollectionCase" >
+    update report_collection_case
+    <set >
+      <if test="reportCollectionId != null" >
+        report_collection_id = #{reportCollectionId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionCaseIndex != null" >
+        collection_case_index = #{collectionCaseIndex,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null" >
+        case_id = #{caseId,jdbcType=VARCHAR},
+      </if>
+      <if test="caseType != null" >
+        case_type = #{caseType,jdbcType=VARCHAR},
+      </if>
+      <if test="caseName != null" >
+        case_name = #{caseName,jdbcType=VARCHAR},
+      </if>
+      <if test="caseDesc != null" >
+        case_desc = #{caseDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="runTimes != null" >
+        run_times = #{runTimes,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="during != null" >
+        during = #{during,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.ReportCollectionCase" >
+    update report_collection_case
+    set report_collection_id = #{reportCollectionId,jdbcType=VARCHAR},
+      collection_case_index = #{collectionCaseIndex,jdbcType=INTEGER},
+      case_id = #{caseId,jdbcType=VARCHAR},
+      case_type = #{caseType,jdbcType=VARCHAR},
+      case_name = #{caseName,jdbcType=VARCHAR},
+      case_desc = #{caseDesc,jdbcType=VARCHAR},
+      run_times = #{runTimes,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=BIGINT},
+      end_time = #{endTime,jdbcType=BIGINT},
+      during = #{during,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
