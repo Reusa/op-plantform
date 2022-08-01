@@ -2,10 +2,11 @@ package com.lakinm.op.model.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class UserVo {
+public class UserVo implements Serializable {
 
     private String id;
 

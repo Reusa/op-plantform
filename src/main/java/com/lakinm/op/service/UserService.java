@@ -1,6 +1,7 @@
 package com.lakinm.op.service;
 
 import com.lakinm.op.model.dto.UserDTO;
+import com.lakinm.op.model.vo.UserVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,4 +14,6 @@ public interface UserService {
     UserDTO getUser(String account);
 
     List<String> getUserProjectPermission(String userId, String projectId);
+
+    UserVo checkToken(String token);
 }

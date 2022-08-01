@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lakinm.op.model.mapper.MenuMapper" >
-  <select id="findAllMenus" resultType="com.lakinm.op.model.entity.Menu">
+  <select id="findAllMenus" resultType="com.lakinm.op.model.dto.MenuDTO">
     select * from `menu` where deleted = 0
   </select>
 </mapper>

@@ -18,7 +18,7 @@ public class MenuDTO {
 
     private String path;
 
-    private Long parentMenu;
+    private String parentMenu;
 
     private String permissionId;
 

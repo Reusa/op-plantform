@@ -11,7 +11,7 @@ public class Menu {
 
     private String path;
 
-    private Long parentMenu;
+    private String parentMenu;
 
     private String permissionId;
 
@@ -57,11 +57,11 @@ public class Menu {
         this.path = path == null ? null : path.trim();
     }
 
-    public Long getParentMenu() {
+    public String getParentMenu() {
         return parentMenu;
     }
 
-    public void setParentMenu(Long parentMenu) {
+    public void setParentMenu(String parentMenu) {
         this.parentMenu = parentMenu;
     }
 
