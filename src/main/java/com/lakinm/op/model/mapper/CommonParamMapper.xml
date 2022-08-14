@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lakinm.op.model.mapper.CommonParamMapper" >
+    <select id="findParamGroupByPid" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.ParamGroup">
+        select * from param_group where project_id = #{projectId}
+    </select>
+
+    <insert id="saveParamGroup" parameterType="com.lakinm.op.model.entity.ParamGroup">
+        INSERT INTO param_group (id, name, param_type, description, project_id,
+        update_user, create_user, create_time, update_time) VALUES
+        (#{id}, #{name}, #{paramType}, #{description}, #{projectId}, #{updateUser}, #{createUser}, #{createTime}, #{updateTime})
+    </insert>
+
+    <delete id="deleteParamGroupById" parameterType="java.lang.String">
+        delete from param_group where id = #{id}
+    </delete>
+
+    <select id="selectPatamDataById" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.ParamData">
+        select * from param_data where id = #{id} limit 1
+    </select>
+
+    <insert id="saveParamData" parameterType="com.lakinm.op.model.entity.ParamData">
+        INSERT INTO param_data(id, name, param_data, group_id, data_type, description, update_user, create_user, create_time, update_time)
+        VALUES (#{id}, #{name}, #{paramData}, #{groupId}, #{dataType}, #{description}, #{updateUser}, #{createUser}, #{createTime}, #{updateTime});
+    </insert>
+
+    <update id="updateParamData" parameterType="com.lakinm.op.model.entity.ParamData">
+        UPDATE param_data SET name = #{name}, param_data = #{paramData}, group_id = #{groupId},
+        data_type = #{dataType}, description = #{description}, update_user = #{updateUser},
+        create_user = #{createUser}, create_time = #{createTime}, update_time = #{updateTime} WHERE id = #{id}
+    </update>
+
+    <select id="findParamDataByGroupId" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.ParamData">
+        select * from param_data where group_id = #{groupId}
+    </select>
+
+    <delete id="deleteParamDataById" parameterType="java.lang.String">
+        delete from param_data where id = #{paramDataId}
+    </delete>
+
+    <select id="findParamDataByGroupIdAndName" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.ParamData">
+        select * from param_data where group_id = #{groupId} and name = #{name}
+    </select>
+</mapper>

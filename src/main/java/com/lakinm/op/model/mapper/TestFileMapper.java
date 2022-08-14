@@ -1,17 +1,15 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.TestFileDTO;
 import com.lakinm.op.model.entity.TestFile;
 
+import java.util.List;
+
 public interface TestFileMapper {
-    int deleteByPrimaryKey(String id);
 
-    int insert(TestFile record);
+    List<TestFileDTO> selectFileList(String condition, String projectId);
 
-    int insertSelective(TestFile record);
+    void deleteTestFileById(String fileId);
 
-    TestFile selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(TestFile record);
-
-    int updateByPrimaryKey(TestFile record);
+    void insertFile(TestFile testFile);
 }

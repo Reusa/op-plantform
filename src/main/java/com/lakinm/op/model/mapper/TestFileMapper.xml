@@ -1,142 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lakinm.op.model.mapper.TestFileMapper" >
-  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.TestFile" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
-    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
-    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="BIGINT" />
-    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, name, file_path, description, project_id, update_user, create_user, create_time, 
-    update_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from test_file
-    where id = #{id,jdbcType=VARCHAR}
+  <select id="selectFileList" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.TestFileDTO">
+    select a.id, a.name, a.file_path, a.description, a.project_id, a.create_time, a.update_time,
+    a.create_user, a.update_user, b.username as username
+    from test_file a left join user b on b.id = a.create_user
+    where a.project_id = #{projectId}
+    <if test="condition != null and condition != ''">
+      and a.name like #{condition} or a.id like #{condition}
+    </if>
+    order by a.create_time desc
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from test_file
-    where id = #{id,jdbcType=VARCHAR}
+
+  <delete id="deleteTestFileById" parameterType="java.lang.String">
+    delete from test_file where id = #{fileId}
   </delete>
-  <insert id="insert" parameterType="com.lakinm.op.model.entity.TestFile" >
-    insert into test_file (id, name, file_path, 
-      description, project_id, update_user, 
-      create_user, create_time, update_time
-      )
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
-      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
-      )
+
+  <insert id="insertFile" parameterType="com.lakinm.op.model.entity.TestFile">
+    INSERT INTO test_file (`id`, `name`, `file_path`, `description`, `project_id`, `update_user`, `create_user`, `create_time`, `update_time`)
+    VALUES
+    (#{id}, #{name}, #{filePath}, #{description}, #{projectId}, #{updateUser}, #{createUser}, #{createTime}, #{updateTime});
   </insert>
-  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.TestFile" >
-    insert into test_file
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="filePath != null" >
-        file_path,
-      </if>
-      <if test="description != null" >
-        description,
-      </if>
-      <if test="projectId != null" >
-        project_id,
-      </if>
-      <if test="updateUser != null" >
-        update_user,
-      </if>
-      <if test="createUser != null" >
-        create_user,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="filePath != null" >
-        #{filePath,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="projectId != null" >
-        #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null" >
-        #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.TestFile" >
-    update test_file
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="filePath != null" >
-        file_path = #{filePath,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="projectId != null" >
-        project_id = #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null" >
-        update_user = #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        create_user = #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.TestFile" >
-    update test_file
-    set name = #{name,jdbcType=VARCHAR},
-      file_path = #{filePath,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      project_id = #{projectId,jdbcType=VARCHAR},
-      update_user = #{updateUser,jdbcType=VARCHAR},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=BIGINT}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
 </mapper>

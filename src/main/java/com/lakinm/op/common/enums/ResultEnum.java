@@ -4,6 +4,8 @@ public enum ResultEnum {
     SUCCESS(200, "成功"),
     FAILED(500, "系统错误，请联系管理员"),
     ERROR_ACCOUNT_OR_PASSWORD(0, "用户名或密码错误"),
+
+    SAME_PARAM_NAME(500, "参数名重复"),
     ;
 
     private Integer code;

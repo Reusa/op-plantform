@@ -7,4 +7,5 @@ public interface UserMapper {
 
     UserDTO findUserByAccount(String account);
 
+    void updateUserInfoById(User user);
 }

@@ -4,4 +4,9 @@
   <select id="findUserByAccount" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.UserDTO">
     SELECT * FROM `user` where account = #{account}
   </select>
+
+  <update id="updateUserInfoById" parameterType="com.lakinm.op.model.entity.User">
+    UPDATE user SET username = #{username}, email = #{email}, `update_time` = #{updateTime}
+    WHERE `id` = #{id};
+  </update>
 </mapper>

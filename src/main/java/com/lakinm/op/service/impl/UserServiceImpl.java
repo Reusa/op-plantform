@@ -1,13 +1,16 @@
 package com.lakinm.op.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lakinm.op.common.enums.ResultEnum;
 import com.lakinm.op.model.dto.UserDTO;
+import com.lakinm.op.model.entity.User;
 import com.lakinm.op.model.mapper.PermissionMapper;
 import com.lakinm.op.model.mapper.UserMapper;
 import com.lakinm.op.model.vo.UserVo;
 import com.lakinm.op.response.Result;
 import com.lakinm.op.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -50,5 +53,15 @@ public class UserServiceImpl implements UserService {
             log.error(e.getMessage(), e);
             return null;
         }
+    }
+
+    @Override
+    public Result updateUserInfo(UserVo userVo) {
+        User user = new User();
+        user.setUsername(userVo.getUsername());
+        user.setEmail(userVo.getEmail());
+        user.setUpdateTime(System.currentTimeMillis());
+        userMapper.updateUserInfoById(user);
+        return Result.success(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), null);
     }
 }

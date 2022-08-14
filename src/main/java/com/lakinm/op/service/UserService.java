@@ -2,6 +2,7 @@ package com.lakinm.op.service;
 
 import com.lakinm.op.model.dto.UserDTO;
 import com.lakinm.op.model.vo.UserVo;
+import com.lakinm.op.response.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,4 +17,6 @@ public interface UserService {
     List<String> getUserProjectPermission(String userId, String projectId);
 
     UserVo checkToken(String token);
+
+    Result updateUserInfo(UserVo userVo);
 }
