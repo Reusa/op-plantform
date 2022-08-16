@@ -1,20 +1,23 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.FunctionDTO;
 import com.lakinm.op.model.entity.Function;
 import com.lakinm.op.model.entity.FunctionWithBLOBs;
+import com.lakinm.op.model.vo.FunctionVo;
+
+import java.util.List;
 
 public interface FunctionMapper {
-    int deleteByPrimaryKey(String id);
 
-    int insert(FunctionWithBLOBs record);
+    Function selectFunctionByName(String name);
 
-    int insertSelective(FunctionWithBLOBs record);
+    void insertFunction(Function function);
 
-    FunctionWithBLOBs selectByPrimaryKey(String id);
+    void updateFunction(Function function);
 
-    int updateByPrimaryKeySelective(FunctionWithBLOBs record);
+    void deleteFunctionById(String functionId);
 
-    int updateByPrimaryKeyWithBLOBs(FunctionWithBLOBs record);
+    Function findFunctionDetailById(String functionId);
 
-    int updateByPrimaryKey(Function record);
+    List<FunctionDTO> getFunctionList(String condition, String projectId);
 }

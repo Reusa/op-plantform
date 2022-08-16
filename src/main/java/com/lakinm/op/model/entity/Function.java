@@ -7,6 +7,10 @@ public class Function {
 
     private String from;
 
+    private String param;
+
+    private String code;
+
     private String expression;
 
     private String description;
@@ -99,5 +103,21 @@ public class Function {
 
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getParam() {
+        return param;
+    }
+
+    public void setParam(String param) {
+        this.param = param;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

@@ -1,197 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lakinm.op.model.mapper.FunctionMapper" >
-  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.Function" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="from" property="from" jdbcType="VARCHAR" />
-    <result column="expression" property="expression" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
-    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
-    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="BIGINT" />
-    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.lakinm.op.model.entity.FunctionWithBLOBs" extends="BaseResultMap" >
-    <result column="param" property="param" jdbcType="LONGVARCHAR" />
-    <result column="code" property="code" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, name, from, expression, description, project_id, update_user, create_user, create_time, 
-    update_time
-  </sql>
-  <sql id="Blob_Column_List" >
-    param, code
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from function
-    where id = #{id,jdbcType=VARCHAR}
+  <select id="selectFunctionByName" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.Function">
+    select * from `function` where name = #{name} limit 1
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from function
-    where id = #{id,jdbcType=VARCHAR}
+
+  <insert id="insertFunction" parameterType="com.lakinm.op.model.entity.Function">
+    INSERT INTO `function`(id, name, `from`, param, code, expression, description, project_id, update_user, create_user, create_time, update_time)
+    VALUES
+    (#{id}, #{name}, #{from}, #{param}, #{code}, #{expression}, #{description}, #{projectId}, #{updateUser}, #{createUser}, #{createTime}, #{updateTime});
+  </insert>
+
+  <update id="updateFunction" parameterType="com.lakinm.op.model.entity.Function">
+    UPDATE `function` SET name = #{name}, `from` = #{from}, param = #{param}, code = #{code}, expression = #{expression},
+    description = #{description}, project_id = #{projectId}, update_user = #{updateUser}, update_time = #{updateTime} WHERE id = #{id};
+  </update>
+
+  <delete id="deleteFunctionById" parameterType="java.lang.String">
+    delete from `function` where id = #{functionId}
   </delete>
-  <insert id="insert" parameterType="com.lakinm.op.model.entity.FunctionWithBLOBs" >
-    insert into function (id, name, from, 
-      expression, description, project_id, 
-      update_user, create_user, create_time, 
-      update_time, param, code
-      )
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{from,jdbcType=VARCHAR}, 
-      #{expression,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, 
-      #{updateUser,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, 
-      #{updateTime,jdbcType=BIGINT}, #{param,jdbcType=LONGVARCHAR}, #{code,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.FunctionWithBLOBs" >
-    insert into function
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="from != null" >
-        from,
-      </if>
-      <if test="expression != null" >
-        expression,
-      </if>
-      <if test="description != null" >
-        description,
-      </if>
-      <if test="projectId != null" >
-        project_id,
-      </if>
-      <if test="updateUser != null" >
-        update_user,
-      </if>
-      <if test="createUser != null" >
-        create_user,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="param != null" >
-        param,
-      </if>
-      <if test="code != null" >
-        code,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="from != null" >
-        #{from,jdbcType=VARCHAR},
-      </if>
-      <if test="expression != null" >
-        #{expression,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="projectId != null" >
-        #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null" >
-        #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=BIGINT},
-      </if>
-      <if test="param != null" >
-        #{param,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="code != null" >
-        #{code,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.FunctionWithBLOBs" >
-    update function
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="from != null" >
-        from = #{from,jdbcType=VARCHAR},
-      </if>
-      <if test="expression != null" >
-        expression = #{expression,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="projectId != null" >
-        project_id = #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null" >
-        update_user = #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        create_user = #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=BIGINT},
-      </if>
-      <if test="param != null" >
-        param = #{param,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="code != null" >
-        code = #{code,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lakinm.op.model.entity.FunctionWithBLOBs" >
-    update function
-    set name = #{name,jdbcType=VARCHAR},
-      from = #{from,jdbcType=VARCHAR},
-      expression = #{expression,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      project_id = #{projectId,jdbcType=VARCHAR},
-      update_user = #{updateUser,jdbcType=VARCHAR},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=BIGINT},
-      param = #{param,jdbcType=LONGVARCHAR},
-      code = #{code,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.Function" >
-    update function
-    set name = #{name,jdbcType=VARCHAR},
-      from = #{from,jdbcType=VARCHAR},
-      expression = #{expression,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      project_id = #{projectId,jdbcType=VARCHAR},
-      update_user = #{updateUser,jdbcType=VARCHAR},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=BIGINT}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+
+  <select id="findFunctionDetailById" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.Function">
+    select * from `function` where id = #{functionId}
+  </select>
+
+  <select id="getFunctionList" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.FunctionDTO">
+    SELECT a.id, a.name, a.from, a.param, a.code, a.expression, a.description, a.project_id, a.create_user, a.update_time, b.username
+    FROM `function` a
+    LEFT JOIN user b
+    on a.create_user = b.id
+    where (a.project_id = #{projectId} or a.from = 'system')
+    <if test="condition != null and condition != ''">
+      and a.name like #{condition}
+    </if>
+    ORDER BY a.create_time desc, a.name
+  </select>
 </mapper>
