@@ -5,7 +5,14 @@ public enum ResultEnum {
     FAILED(500, "系统错误，请联系管理员"),
     ERROR_ACCOUNT_OR_PASSWORD(0, "用户名或密码错误"),
 
+    USER_NOT_LOGIN(500, "用户未登录"),
+    NO_TOKEN(500, "缺少token"),
+    TOKEN_ERROR(500, "token异常"),
+
+    ENGINE_EXIST(500, "引擎已存在"),
+
     SAME_PARAM_NAME(500, "参数名重复"),
+    SAME_NAME(500, "名称重复")
     ;
 
     private Integer code;

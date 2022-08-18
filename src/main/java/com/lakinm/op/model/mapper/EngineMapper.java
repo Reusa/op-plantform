@@ -1,17 +1,21 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.EngineDTO;
 import com.lakinm.op.model.entity.Engine;
 
+import java.util.List;
+
 public interface EngineMapper {
-    int deleteByPrimaryKey(String id);
 
-    int insert(Engine record);
+    Engine selectEngineByName(String projectId, String name);
 
-    int insertSelective(Engine record);
+    void saveEngine(Engine newEngine);
 
-    Engine selectByPrimaryKey(String id);
+    void deleteEngineById(String id);
 
-    int updateByPrimaryKeySelective(Engine record);
+    EngineDTO getEngineById(String id);
 
-    int updateByPrimaryKey(Engine record);
+    List<Engine> selectEngineByProjectId(String projectId);
+
+    List<EngineDTO> selectEngineList(String projectId, String condition);
 }

@@ -9,6 +9,7 @@ import com.lakinm.op.common.exception.TokenExpireException;
 import com.lakinm.op.common.exception.TokenVerifyException;
 import com.lakinm.op.model.entity.Engine;
 import com.lakinm.op.model.entity.User;
+import com.lakinm.op.model.vo.UserVo;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -75,4 +76,5 @@ public class JwtUtils {
         // 返回基本信息
         return jwt;
     }
+
 }

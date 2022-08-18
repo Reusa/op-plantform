@@ -63,4 +63,9 @@ public class LoginController {
         }
     }
 
+    @PostMapping("/register")
+    public Result register() {
+        return Result.fail(500, "未开放注册");
+    }
+
 }

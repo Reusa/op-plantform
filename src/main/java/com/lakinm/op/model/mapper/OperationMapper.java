@@ -1,20 +1,21 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.OperationDTO;
 import com.lakinm.op.model.entity.Operation;
 import com.lakinm.op.model.entity.OperationWithBLOBs;
 
+import java.util.List;
+
 public interface OperationMapper {
-    int deleteByPrimaryKey(String id);
+    Operation findOperationByName(String name, String projectId);
 
-    int insert(OperationWithBLOBs record);
+    void insertOperation(Operation operation);
 
-    int insertSelective(OperationWithBLOBs record);
+    void updateOperation(Operation operation);
 
-    OperationWithBLOBs selectByPrimaryKey(String id);
+    void deleteOperationById(String id);
 
-    int updateByPrimaryKeySelective(OperationWithBLOBs record);
+    Operation findOperationById(String id);
 
-    int updateByPrimaryKeyWithBLOBs(OperationWithBLOBs record);
-
-    int updateByPrimaryKey(Operation record);
+    List<OperationDTO> findAllOperation(String condition, String projectId, String type);
 }

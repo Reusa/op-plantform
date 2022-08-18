@@ -2,16 +2,16 @@ package com.lakinm.op.model.mapper;
 
 import com.lakinm.op.model.entity.ApiModule;
 
+import java.util.List;
+
 public interface ApiModuleMapper {
-    int deleteByPrimaryKey(String id);
+    ApiModule selectModByNameAndFa(String name, String parentId, String projectId);
 
-    int insert(ApiModule record);
+    void insertModule(ApiModule saveMod);
 
-    int insertSelective(ApiModule record);
+    void updateModuleById(ApiModule saveMod);
 
-    ApiModule selectByPrimaryKey(String id);
+    List<ApiModule> selectModByIdAndParId(String mid, String parentId, String projectId);
 
-    int updateByPrimaryKeySelective(ApiModule record);
-
-    int updateByPrimaryKey(ApiModule record);
+    List<ApiModule> selectModByProId(String projectId);
 }

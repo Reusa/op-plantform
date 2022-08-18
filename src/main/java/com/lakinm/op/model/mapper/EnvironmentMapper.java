@@ -1,17 +1,20 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.EnvironmentDTO;
 import com.lakinm.op.model.entity.Environment;
 
+import java.util.List;
+
 public interface EnvironmentMapper {
-    int deleteByPrimaryKey(String id);
+    Environment findEnvByName(String projectId, String name);
 
-    int insert(Environment record);
+    void insertEnvironment(Environment env);
 
-    int insertSelective(Environment record);
+    void updateEnvironmentById(Environment env);
 
-    Environment selectByPrimaryKey(String id);
+    void deleteEnvById(String id);
 
-    int updateByPrimaryKeySelective(Environment record);
+    List<Environment> findEnvByProjectId(String projectId);
 
-    int updateByPrimaryKey(Environment record);
+    List<EnvironmentDTO> findEnvByCondition(String projectId, String condition);
 }

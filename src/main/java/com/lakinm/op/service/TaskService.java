@@ -1,10 +1,9 @@
-package com.lakinm.op.model.mapper;
+package com.lakinm.op.service;
 
 import com.lakinm.op.model.dto.TaskDTO;
-import com.lakinm.op.model.entity.Task;
 
 import java.util.List;
 
-public interface TaskMapper {
+public interface TaskService {
     List<TaskDTO> getTaskListByEngineId(String id);
 }

@@ -9,6 +9,12 @@ public class Operation {
 
     private String from;
 
+    private String element;
+
+    private String data;
+
+    private String code;
+
     private String description;
 
     private String projectId;
@@ -99,5 +105,29 @@ public class Operation {
 
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getElement() {
+        return element;
+    }
+
+    public void setElement(String element) {
+        this.element = element;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

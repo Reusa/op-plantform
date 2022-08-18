@@ -1,164 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lakinm.op.model.mapper.EngineMapper" >
-  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.Engine" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="engine_type" property="engineType" jdbcType="VARCHAR" />
-    <result column="secret" property="secret" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
-    <result column="last_heartbeat_time" property="lastHeartbeatTime" jdbcType="BIGINT" />
-    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
-    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
-    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="BIGINT" />
-    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, name, engine_type, secret, status, last_heartbeat_time, project_id, update_user, 
-    create_user, create_time, update_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from engine
-    where id = #{id,jdbcType=VARCHAR}
+  <select id="selectEngineByName" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.Engine">
+    select * from `engine` where project_id = #{projectId} and name = #{name}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from engine
-    where id = #{id,jdbcType=VARCHAR}
+
+  <insert id="saveEngine" parameterType="com.lakinm.op.model.entity.Engine">
+    INSERT INTO `engine`(`id`, `name`, `engine_type`, `secret`, `status`, `last_heartbeat_time`, `project_id`,
+    `update_user`, `create_user`, `create_time`, `update_time`)
+    VALUES
+    (#{id}, #{name}, #{engineType}, #{secret}, #{status}, #{lastHeartbeatTime}, #{projectId}, #{updateUser},
+    #{createUser}, #{createTime}, #{updateTime})
+  </insert>
+
+  <delete id="deleteEngineById" parameterType="java.lang.String">
+    delete from `engine` where id = #{id}
   </delete>
-  <insert id="insert" parameterType="com.lakinm.op.model.entity.Engine" >
-    insert into engine (id, name, engine_type, 
-      secret, status, last_heartbeat_time, 
-      project_id, update_user, create_user, 
-      create_time, update_time)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{engineType,jdbcType=VARCHAR}, 
-      #{secret,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{lastHeartbeatTime,jdbcType=BIGINT}, 
-      #{projectId,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.Engine" >
-    insert into engine
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="engineType != null" >
-        engine_type,
-      </if>
-      <if test="secret != null" >
-        secret,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="lastHeartbeatTime != null" >
-        last_heartbeat_time,
-      </if>
-      <if test="projectId != null" >
-        project_id,
-      </if>
-      <if test="updateUser != null" >
-        update_user,
-      </if>
-      <if test="createUser != null" >
-        create_user,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="engineType != null" >
-        #{engineType,jdbcType=VARCHAR},
-      </if>
-      <if test="secret != null" >
-        #{secret,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="lastHeartbeatTime != null" >
-        #{lastHeartbeatTime,jdbcType=BIGINT},
-      </if>
-      <if test="projectId != null" >
-        #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null" >
-        #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.Engine" >
-    update engine
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="engineType != null" >
-        engine_type = #{engineType,jdbcType=VARCHAR},
-      </if>
-      <if test="secret != null" >
-        secret = #{secret,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="lastHeartbeatTime != null" >
-        last_heartbeat_time = #{lastHeartbeatTime,jdbcType=BIGINT},
-      </if>
-      <if test="projectId != null" >
-        project_id = #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null" >
-        update_user = #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        create_user = #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.Engine" >
-    update engine
-    set name = #{name,jdbcType=VARCHAR},
-      engine_type = #{engineType,jdbcType=VARCHAR},
-      secret = #{secret,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
-      last_heartbeat_time = #{lastHeartbeatTime,jdbcType=BIGINT},
-      project_id = #{projectId,jdbcType=VARCHAR},
-      update_user = #{updateUser,jdbcType=VARCHAR},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=BIGINT}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+
+  <select id="getEngineById" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.EngineDTO">
+    select a.id, a.name, a.engine_type, a.secret, a.status, a.last_heartbeat_time, a.project_id,
+    a.create_user, a.create_time, b.username as username
+    from `engine` a
+    LEFT JOIN `user` b
+    on a.create_user = b.id where a.id = #{id}
+  </select>
+
+  <select id="selectEngineByProjectId" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.Engine">
+    select * from `engine` where project_id = #{projectId}
+  </select>
+
+  <select id="selectEngineList" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.EngineDTO">
+    SELECT a.id, a.name, a.engine_type, a.status, a.project_id, a.create_time, a.update_time,
+    a.create_user, a.update_user, b.username as username
+    FROM `engine` a LEFT JOIN `user` b on a.create_user = b.id
+    WHERE (a.project_id = #{projectId} or a.engine_type = 'system')
+    <if test="condition != null and condition != ''">
+      and a.name like #{condition}
+    </if>
+    ORDER BY a.engine_type desc, a.create_time desc
+  </select>
 </mapper>
