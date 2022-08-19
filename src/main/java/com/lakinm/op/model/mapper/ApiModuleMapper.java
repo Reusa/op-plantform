@@ -1,7 +1,8 @@
 package com.lakinm.op.model.mapper;
 
-import com.lakinm.op.model.dto.ApiModuleDTO;
+import com.lakinm.op.model.dto.ModuleDTO;
 import com.lakinm.op.model.entity.ApiModule;
+import com.lakinm.op.model.entity.Module;
 
 import java.util.List;
 
@@ -12,13 +13,13 @@ public interface ApiModuleMapper {
 
     void updateModuleById(ApiModule saveMod);
 
-    List<ApiModule> selectModByIdAndParId(String mid, String parentId, String projectId);
+    List<Module> selectModByIdAndParId(String mid, String parentId, String projectId);
 
-    List<ApiModule> selectModByProId(String projectId);
+    List<Module> selectModByProId(String projectId);
 
-    void deleteModuleByIds(List<ApiModule> targetList);
+    void deleteModuleByIds(List<Module> targetList);
 
-    List<ApiModuleDTO> selectModuleDTOByProId(String projectId);
+    List<ModuleDTO> selectModuleDTOByProId(String projectId);
 
-    List<ApiModuleDTO> selectChildModuleDTOByProId(String projectId);
+    List<ModuleDTO> selectChildModuleDTOByProId(String projectId);
 }

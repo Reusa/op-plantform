@@ -21,7 +21,7 @@
     WHERE `id` = #{id}
   </update>
 
-  <select id="selectModByIdAndParId" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.ApiModule">
+  <select id="selectModByIdAndParId" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.Module">
     select * from `api_module` where id = #{mid}
     <if test="parentId != null and parentId != ''">
       and parent_id = #{parentId}
@@ -29,7 +29,7 @@
     and project_id = #{projectId}
   </select>
 
-  <select id="selectModByProId" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.ApiModule">
+  <select id="selectModByProId" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.Module">
     select * from `api_module` where project_id = #{projectId} and parent_id is not null
   </select>
 
@@ -41,7 +41,7 @@
     </foreach>
   </delete>
 
-  <select id="selectModuleDTOByProId" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.ApiModuleDTO">
+  <select id="selectModuleDTOByProId" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.ModuleDTO">
     select `id`, `name`, `parent_id`, `project_id`, `create_user`, `create_time`, `name` as label
     from `api_module`
     <if test="projectId != null and projectId != ''">
@@ -49,7 +49,7 @@
     </if>
   </select>
 
-  <select id="selectChildModuleDTOByProId" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.ApiModuleDTO">
+  <select id="selectChildModuleDTOByProId" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.ModuleDTO">
     select `id`, `name`, `parent_id`, `project_id`, `create_user`, `create_time`, `name` as label
     from `api_module` where
     parent_id is not null

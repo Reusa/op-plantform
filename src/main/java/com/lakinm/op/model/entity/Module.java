@@ -1,12 +1,11 @@
-package com.lakinm.op.model.dto;
+package com.lakinm.op.model.entity;
 
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
-public class ApiModuleDTO implements Serializable {
+public class Module implements Serializable {
     private String id;
 
     private String name;
@@ -15,11 +14,11 @@ public class ApiModuleDTO implements Serializable {
 
     private String projectId;
 
+    private String updateUser;
+
     private String createUser;
 
     private Long createTime;
 
-    private String label;
-
-    private List<ApiModuleDTO> children;
+    private Long updateTime;
 }

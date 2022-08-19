@@ -9,4 +9,16 @@ public interface ModuleService {
     Result deleteModule(ModuleRequest request);
 
     Result getApiModuleList(String projectId);
+
+    Result addPageModule(String token, ModuleRequest request);
+
+    Result deletePageModule(ModuleRequest request);
+
+    Result getPageModuleList(String projectId);
+
+    Result addCaseModule(String token, ModuleRequest request);
+
+    Result deleteCaseModule(ModuleRequest request);
+
+    Result getCaseModuleList(String projectId);
 }

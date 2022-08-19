@@ -1,17 +1,25 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.ModuleDTO;
+import com.lakinm.op.model.entity.Module;
 import com.lakinm.op.model.entity.PageModule;
 
+import java.util.List;
+
 public interface PageModuleMapper {
-    int deleteByPrimaryKey(String id);
+    PageModule selectModByNameAndFa(String name, String parentId, String projectId);
 
-    int insert(PageModule record);
+    void insertModule(PageModule saveMod);
 
-    int insertSelective(PageModule record);
+    void updateModuleById(PageModule saveMod);
 
-    PageModule selectByPrimaryKey(String id);
+    List<Module> selectModByIdAndParId(String mid, String parentId, String projectId);
 
-    int updateByPrimaryKeySelective(PageModule record);
+    List<Module> selectModByProId(String projectId);
 
-    int updateByPrimaryKey(PageModule record);
+    void deleteModuleByIds(List<Module> targetList);
+
+    List<ModuleDTO> selectModuleDTOByProId(String projectId);
+
+    List<ModuleDTO> selectChildModuleDTOByProId(String projectId);
 }

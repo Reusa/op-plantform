@@ -1,20 +1,25 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.ApiDTO;
 import com.lakinm.op.model.entity.Api;
 import com.lakinm.op.model.entity.ApiWithBLOBs;
+import com.lakinm.op.response.Result;
+
+import java.util.List;
 
 public interface ApiMapper {
-    int deleteByPrimaryKey(String id);
 
-    int insert(ApiWithBLOBs record);
+    Api selectApiByName(String name, String projectId);
 
-    int insertSelective(ApiWithBLOBs record);
+    void insertApi(Api saveApi);
 
-    ApiWithBLOBs selectByPrimaryKey(String id);
+    void updateApi(Api saveApi);
 
-    int updateByPrimaryKeySelective(ApiWithBLOBs record);
+    Result deleteApiById(String id);
 
-    int updateByPrimaryKeyWithBLOBs(ApiWithBLOBs record);
+    ApiDTO selectApiById(String id);
 
-    int updateByPrimaryKey(Api record);
+    List<ApiDTO> selectApiList(String projectId, String moduleId, String condition);
+
+    void updateApiToDelStatus(String id);
 }

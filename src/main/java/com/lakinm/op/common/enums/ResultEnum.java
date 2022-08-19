@@ -11,6 +11,9 @@ public enum ResultEnum {
 
     ENGINE_EXIST(500, "引擎已存在"),
 
+    MODULE_NOT_EXIST(500, "模块未找到"),
+    NO_MODULE_IN_PROJECT(500, "该项目下没有模块"),
+
     SAME_PARAM_NAME(500, "参数名重复"),
     SAME_NAME(500, "名称重复")
     ;

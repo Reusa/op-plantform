@@ -33,6 +33,14 @@ public class Api {
 
     private String status;
 
+    private String header;
+
+    private String body;
+
+    private String query;
+
+    private String rest;
+
     public String getId() {
         return id;
     }
@@ -159,5 +167,37 @@ public class Api {
 
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
+    public String getRest() {
+        return rest;
+    }
+
+    public void setRest(String rest) {
+        this.rest = rest;
     }
 }
