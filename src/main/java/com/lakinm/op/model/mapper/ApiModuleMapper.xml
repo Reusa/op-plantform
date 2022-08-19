@@ -32,4 +32,29 @@
   <select id="selectModByProId" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.ApiModule">
     select * from `api_module` where project_id = #{projectId} and parent_id is not null
   </select>
+
+  <delete id="deleteModuleByIds" parameterType="java.util.List">
+    delete from `api_module`
+    where id in
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+      #{item.id}
+    </foreach>
+  </delete>
+
+  <select id="selectModuleDTOByProId" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.ApiModuleDTO">
+    select `id`, `name`, `parent_id`, `project_id`, `create_user`, `create_time`, `name` as label
+    from `api_module`
+    <if test="projectId != null and projectId != ''">
+      where project_id = #{projectId}
+    </if>
+  </select>
+
+  <select id="selectChildModuleDTOByProId" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.ApiModuleDTO">
+    select `id`, `name`, `parent_id`, `project_id`, `create_user`, `create_time`, `name` as label
+    from `api_module` where
+    parent_id is not null
+    <if test="projectId != null and projectId != ''">
+      and project_id = #{projectId}
+    </if>
+  </select>
 </mapper>

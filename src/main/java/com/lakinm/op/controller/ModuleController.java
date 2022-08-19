@@ -23,8 +23,8 @@ public class ModuleController {
         return moduleService.deleteModule(request);
     }
 
-    @PostMapping("/getModuleList")
-    public Result getModuleList() {
-        return null;
+    @GetMapping("/getModuleList")
+    public Result getModuleList(@RequestParam String projectId) {
+        return moduleService.getApiModuleList(projectId);
     }
 }

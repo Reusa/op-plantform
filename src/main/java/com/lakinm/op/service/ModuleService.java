@@ -7,4 +7,6 @@ public interface ModuleService {
     Result addModule(String token, ModuleRequest request);
 
     Result deleteModule(ModuleRequest request);
+
+    Result getApiModuleList(String projectId);
 }
