@@ -1,188 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lakinm.op.model.mapper.ElementMapper" >
-  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.Element" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="num" property="num" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="module_id" property="moduleId" jdbcType="VARCHAR" />
-    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
-    <result column="by" property="by" jdbcType="VARCHAR" />
-    <result column="expression" property="expression" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
-    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="BIGINT" />
-    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, num, name, module_id, project_id, by, expression, description, update_user, create_user, 
-    create_time, update_time, status
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from element
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from element
-    where id = #{id,jdbcType=VARCHAR}
+  <insert id="insertElement" parameterType="com.lakinm.op.model.entity.Element">
+    INSERT INTO `element`(`id`, `name`, `module_id`, `project_id`, `by`, `expression`, `description`,
+    `update_user`, `create_user`, `create_time`, `update_time`, `status`)
+    VALUES
+    (#{id}, #{name}, #{moduleId}, #{projectId}, #{by}, #{expression}, #{description}, #{updateUser},
+    #{createUser}, #{createTime}, #{updateTime}, #{status})
+  </insert>
+
+  <update id="updateElement" parameterType="com.lakinm.op.model.entity.Element">
+    UPDATE `element` SET `name` = #{name}, `module_id` = #{moduleId}, `project_id` = #{projectId}, `by` = #{by},
+    `expression` = #{expression}, `description` = #{description}, `update_user` = #{updateUser}, `create_user` = #{createUser},
+    `create_time` = #{createTime}, `update_time` = #{updateTime} WHERE `id` = #{id}
+  </update>
+
+  <delete id="deleteElementById" parameterType="java.lang.String">
+    delete from `element` where id = #{id}
   </delete>
-  <insert id="insert" parameterType="com.lakinm.op.model.entity.Element" >
-    insert into element (id, num, name, 
-      module_id, project_id, by, 
-      expression, description, update_user, 
-      create_user, create_time, update_time, 
-      status)
-    values (#{id,jdbcType=VARCHAR}, #{num,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{moduleId,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{by,jdbcType=VARCHAR}, 
-      #{expression,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
-      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
-      #{status,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.Element" >
-    insert into element
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="num != null" >
-        num,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="moduleId != null" >
-        module_id,
-      </if>
-      <if test="projectId != null" >
-        project_id,
-      </if>
-      <if test="by != null" >
-        by,
-      </if>
-      <if test="expression != null" >
-        expression,
-      </if>
-      <if test="description != null" >
-        description,
-      </if>
-      <if test="updateUser != null" >
-        update_user,
-      </if>
-      <if test="createUser != null" >
-        create_user,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="num != null" >
-        #{num,jdbcType=BIGINT},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="moduleId != null" >
-        #{moduleId,jdbcType=VARCHAR},
-      </if>
-      <if test="projectId != null" >
-        #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="by != null" >
-        #{by,jdbcType=VARCHAR},
-      </if>
-      <if test="expression != null" >
-        #{expression,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null" >
-        #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=BIGINT},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.Element" >
-    update element
-    <set >
-      <if test="num != null" >
-        num = #{num,jdbcType=BIGINT},
-      </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="moduleId != null" >
-        module_id = #{moduleId,jdbcType=VARCHAR},
-      </if>
-      <if test="projectId != null" >
-        project_id = #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="by != null" >
-        by = #{by,jdbcType=VARCHAR},
-      </if>
-      <if test="expression != null" >
-        expression = #{expression,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null" >
-        update_user = #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        create_user = #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=BIGINT},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
+
+  <update id="updateElementStatusById" parameterType="java.lang.String">
+    UPDATE `element` SET `status` = 'del' where `id` = #{id}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.Element" >
-    update element
-    set num = #{num,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      module_id = #{moduleId,jdbcType=VARCHAR},
-      project_id = #{projectId,jdbcType=VARCHAR},
-      by = #{by,jdbcType=VARCHAR},
-      expression = #{expression,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      update_user = #{updateUser,jdbcType=VARCHAR},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=BIGINT},
-      status = #{status,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+
+  <select id="selectElementDetailById" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.Element">
+    select * from `element` where id = #{id}
+  </select>
+
+  <select id="selectElementByProIdAndModId" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.Element">
+    select * from `element` where `project_id` = #{projectId} and `module_id` = #{moduleId} and status != 'del'
+  </select>
+
+  <select id="selectElementByCondition" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.ElementDTO">
+    SELECT
+    a.id,
+    a.num,
+    a.`name`,
+    a.module_id,
+    b.`name` AS moduleName,
+    a.project_id,
+    a.`by`,
+    a.expression,
+    a.description,
+    a.`status`,
+    a.update_time,
+    a.update_user,
+    c.username AS username
+    FROM
+    `element` a
+    LEFT JOIN `page_module` b ON a.module_id = b.id
+    LEFT JOIN `user` c ON a.update_user = c.id
+    WHERE
+    a.`status` != 'del'
+    <if test = "projectId != null and projectId != ''" >
+      AND a.project_id = #{projectId}
+    </if>
+    <if test = "moduleId != null and moduleId != ''" >
+      AND a.module_id = #{moduleId}
+    </if>
+    <if test = "condition != null and condition != ''" >
+      AND a.NAME LIKE #{condition}
+    </if>
+    ORDER BY a.update_time DESC, a.`name`
+  </select>
 </mapper>

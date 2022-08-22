@@ -1,17 +1,22 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.ElementDTO;
 import com.lakinm.op.model.entity.Element;
 
+import java.util.List;
+
 public interface ElementMapper {
-    int deleteByPrimaryKey(String id);
+    void insertElement(Element element);
 
-    int insert(Element record);
+    void updateElement(Element element);
 
-    int insertSelective(Element record);
+    void deleteElementById(String id);
 
-    Element selectByPrimaryKey(String id);
+    void updateElementStatusById(String id);
 
-    int updateByPrimaryKeySelective(Element record);
+    List<Element> selectElementByProIdAndModId(String projectId, String moduleId);
 
-    int updateByPrimaryKey(Element record);
+    List<ElementDTO> selectElementByCondition(String moduleId, String projectId, String condition);
+
+    Element selectElementDetailById(String id);
 }

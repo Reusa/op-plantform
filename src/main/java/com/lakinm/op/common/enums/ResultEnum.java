@@ -15,7 +15,8 @@ public enum ResultEnum {
     NO_MODULE_IN_PROJECT(500, "该项目下没有模块"),
 
     SAME_PARAM_NAME(500, "参数名重复"),
-    SAME_NAME(500, "名称重复")
+    SAME_NAME(500, "名称重复"),
+    LOST_PARAMS(500, "缺少参数")
     ;
 
     private Integer code;
