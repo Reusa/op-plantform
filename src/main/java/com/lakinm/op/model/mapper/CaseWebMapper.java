@@ -1,20 +1,15 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.CaseWebDTO;
 import com.lakinm.op.model.entity.CaseWeb;
 import com.lakinm.op.model.entity.CaseWebWithBLOBs;
 
+import java.util.List;
+
 public interface CaseWebMapper {
-    int deleteByPrimaryKey(String id);
+    void deleteWebByCaseId(String id);
 
-    int insert(CaseWebWithBLOBs record);
+    void insertWebCase(List<CaseWeb> caseWebs);
 
-    int insertSelective(CaseWebWithBLOBs record);
-
-    CaseWebWithBLOBs selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(CaseWebWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(CaseWebWithBLOBs record);
-
-    int updateByPrimaryKey(CaseWeb record);
+    List<CaseWebDTO> selectCaseWebs(String caseId);
 }

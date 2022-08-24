@@ -19,4 +19,6 @@ public interface ElementMapper {
     List<ElementDTO> selectElementByCondition(String moduleId, String projectId, String condition);
 
     Element selectElementDetailById(String id);
+
+    ElementDTO getElementByIds(String eleId);
 }

@@ -1,19 +1,18 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.CaseDTO;
 import com.lakinm.op.model.entity.Case;
 
+import java.util.List;
+
 public interface CaseMapper {
-    int deleteByPrimaryKey(String id);
+    void insertCase(Case nCase);
 
-    int insert(Case record);
+    void updateCase(Case nCase);
 
-    int insertSelective(Case record);
+    void deleteCaseById(String id);
 
-    Case selectByPrimaryKey(String id);
+    CaseDTO selectCaseDetailById(String caseId);
 
-    int updateByPrimaryKeySelective(Case record);
-
-    int updateByPrimaryKeyWithBLOBs(Case record);
-
-    int updateByPrimaryKey(Case record);
+    List<CaseDTO> selectAllCases(String projectId, String caseType, String moduleId, String condition);
 }

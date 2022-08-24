@@ -63,4 +63,11 @@
     </if>
     ORDER BY a.update_time DESC, a.`name`
   </select>
+
+  <select id="getElementByIds" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.ElementDTO">
+    select a.id, a.`name`, a.module_id, a.`by`, a.expression, b.`name` as moduleName
+    from element a
+    left join page_module b on a.module_id = b.id
+    where a.id = #{eleId}
+  </select>
 </mapper>

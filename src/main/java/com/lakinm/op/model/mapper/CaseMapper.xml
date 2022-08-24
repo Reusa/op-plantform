@@ -1,248 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lakinm.op.model.mapper.CaseMapper" >
-  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.Case" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="num" property="num" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="level" property="level" jdbcType="VARCHAR" />
-    <result column="module_id" property="moduleId" jdbcType="VARCHAR" />
-    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="third_party" property="thirdParty" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="environment_ids" property="environmentIds" jdbcType="VARCHAR" />
-    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
-    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="BIGINT" />
-    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.lakinm.op.model.entity.Case" extends="BaseResultMap" >
-    <result column="common_param" property="commonParam" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, num, name, level, module_id, project_id, type, third_party, description, environment_ids, 
-    update_user, create_user, create_time, update_time, status
-  </sql>
-  <sql id="Blob_Column_List" >
-    common_param
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from case
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from case
-    where id = #{id,jdbcType=VARCHAR}
+  <insert id="insertCase" parameterType="com.lakinm.op.model.entity.Case">
+    INSERT INTO `case`(`id`, `num`, `name`, `level`, `module_id`, `project_id`, `type`, `third_party`, `description`,
+    `environment_ids`, `common_param`, `update_user`, `create_user`, `create_time`, `update_time`, `status`)
+    VALUES
+    (#{id}, #{num}, #{name}, #{level}, #{moduleId}, #{projectId}, #{type}, #{thirdParty}, #{description},
+    #{environmentIds}, #{commonParam}, #{updateUser}, #{createUser}, #{createTime}, #{updateTime}, #{status})
+  </insert>
+
+  <update id="updateCase" parameterType="com.lakinm.op.model.entity.Case">
+    UPDATE `case` SET `name` = #{name}, `level` = #{level}, `module_id` = #{moduleId}, `project_id` = #{projectId},
+    `third_party` = #{thirdParty}, `description` = #{description}, `environment_ids` = #{environmentIds},
+    `common_param` = #{commonParam}, `update_user` = #{updateUser}, `update_time` = #{updateTime}
+    WHERE id = #{id}
+  </update>
+
+  <delete id="deleteCaseById" parameterType="java.lang.String">
+    delete from `case` where id = #{id}
   </delete>
-  <insert id="insert" parameterType="com.lakinm.op.model.entity.Case" >
-    insert into case (id, num, name, 
-      level, module_id, project_id, 
-      type, third_party, description, 
-      environment_ids, update_user, create_user, 
-      create_time, update_time, status, 
-      common_param)
-    values (#{id,jdbcType=VARCHAR}, #{num,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{level,jdbcType=VARCHAR}, #{moduleId,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{thirdParty,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{environmentIds,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR}, 
-      #{commonParam,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.Case" >
-    insert into case
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="num != null" >
-        num,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="level != null" >
-        level,
-      </if>
-      <if test="moduleId != null" >
-        module_id,
-      </if>
-      <if test="projectId != null" >
-        project_id,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-      <if test="thirdParty != null" >
-        third_party,
-      </if>
-      <if test="description != null" >
-        description,
-      </if>
-      <if test="environmentIds != null" >
-        environment_ids,
-      </if>
-      <if test="updateUser != null" >
-        update_user,
-      </if>
-      <if test="createUser != null" >
-        create_user,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="commonParam != null" >
-        common_param,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="num != null" >
-        #{num,jdbcType=BIGINT},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="level != null" >
-        #{level,jdbcType=VARCHAR},
-      </if>
-      <if test="moduleId != null" >
-        #{moduleId,jdbcType=VARCHAR},
-      </if>
-      <if test="projectId != null" >
-        #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="thirdParty != null" >
-        #{thirdParty,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="environmentIds != null" >
-        #{environmentIds,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null" >
-        #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=BIGINT},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="commonParam != null" >
-        #{commonParam,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.Case" >
-    update case
-    <set >
-      <if test="num != null" >
-        num = #{num,jdbcType=BIGINT},
-      </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="level != null" >
-        level = #{level,jdbcType=VARCHAR},
-      </if>
-      <if test="moduleId != null" >
-        module_id = #{moduleId,jdbcType=VARCHAR},
-      </if>
-      <if test="projectId != null" >
-        project_id = #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="thirdParty != null" >
-        third_party = #{thirdParty,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="environmentIds != null" >
-        environment_ids = #{environmentIds,jdbcType=VARCHAR},
-      </if>
-      <if test="updateUser != null" >
-        update_user = #{updateUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createUser != null" >
-        create_user = #{createUser,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=BIGINT},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=BIGINT},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="commonParam != null" >
-        common_param = #{commonParam,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.lakinm.op.model.entity.Case" >
-    update case
-    set num = #{num,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      level = #{level,jdbcType=VARCHAR},
-      module_id = #{moduleId,jdbcType=VARCHAR},
-      project_id = #{projectId,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      third_party = #{thirdParty,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      environment_ids = #{environmentIds,jdbcType=VARCHAR},
-      update_user = #{updateUser,jdbcType=VARCHAR},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=BIGINT},
-      status = #{status,jdbcType=VARCHAR},
-      common_param = #{commonParam,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.Case" >
-    update case
-    set num = #{num,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      level = #{level,jdbcType=VARCHAR},
-      module_id = #{moduleId,jdbcType=VARCHAR},
-      project_id = #{projectId,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      third_party = #{thirdParty,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      environment_ids = #{environmentIds,jdbcType=VARCHAR},
-      update_user = #{updateUser,jdbcType=VARCHAR},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=BIGINT},
-      status = #{status,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+
+  <select id="selectCaseDetailById" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.CaseDTO">
+    select a.id, a.num, a.`name`, a.`level`, a.module_id as moduleId, a.project_id, a.`name` as moduleName,
+    a.type, a.third_party, a.description, a.environment_ids, a.common_param,
+    a.create_user, a.update_user, a.create_time, a.update_time
+    from `case` a
+    left join case_module b
+    on b.id = a.module_id
+    where a.id = #{caseId}
+  </select>
+
+  <select id="selectAllCases" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.CaseDTO">
+    SELECT a.id, a.`num`, a.`name`, a.`level`, a.module_id as moduleId, a.project_id as projectId, a.`type`,
+    a.description, a.create_user as createUser, a.update_time, a.`status`, b.username as username
+    FROM `case` a
+    LEFT JOIN `user` b
+    on a.create_user = b.id
+    where a.project_id = #{projectId}
+    and a.`status` != 'del'
+    <if test="caseType != null and caseType != ''">
+      and a.type = #{caseType}
+    </if>
+    <if test="moduleId != null and moduleId != ''">
+      and a.module_id = #{moduleId}
+    </if>
+    <if test="condition != null and condition != ''">
+      and a.`name` like #{condition}
+    </if>
+    ORDER BY a.update_time desc, a.`name`
+  </select>
 </mapper>

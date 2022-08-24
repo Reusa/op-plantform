@@ -16,7 +16,8 @@ public enum ResultEnum {
 
     SAME_PARAM_NAME(500, "参数名重复"),
     SAME_NAME(500, "名称重复"),
-    LOST_PARAMS(500, "缺少参数")
+    LOST_PARAMS(500, "缺少参数"),
+    ERROR_PARAMS(500, "参数错误")
     ;
 
     private Integer code;

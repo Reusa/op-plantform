@@ -9,6 +9,10 @@ public class CaseWeb {
 
     private String operationId;
 
+    private String element;
+
+    private String data;
+
     public String getId() {
         return id;
     }
@@ -39,5 +43,21 @@ public class CaseWeb {
 
     public void setOperationId(String operationId) {
         this.operationId = operationId == null ? null : operationId.trim();
+    }
+
+    public String getElement() {
+        return element;
+    }
+
+    public void setElement(String element) {
+        this.element = element;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

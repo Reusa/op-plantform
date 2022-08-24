@@ -1,20 +1,15 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.CaseApiDTO;
 import com.lakinm.op.model.entity.CaseApi;
 import com.lakinm.op.model.entity.CaseApiWithBLOBs;
 
+import java.util.List;
+
 public interface CaseApiMapper {
-    int deleteByPrimaryKey(String id);
+    void deleteApiByCaseId(String id);
 
-    int insert(CaseApiWithBLOBs record);
+    void insertApiCase(List<CaseApi> caseApis);
 
-    int insertSelective(CaseApiWithBLOBs record);
-
-    CaseApiWithBLOBs selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(CaseApiWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(CaseApiWithBLOBs record);
-
-    int updateByPrimaryKey(CaseApi record);
+    List<CaseApiDTO> selectCaseApis(String caseId);
 }
