@@ -1,71 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lakinm.op.model.mapper.PlanCollectionMapper" >
-  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.PlanCollection" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="plan_id" property="planId" jdbcType="VARCHAR" />
-    <result column="collection_id" property="collectionId" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, plan_id, collection_id
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from plan_collection
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from plan_collection
-    where id = #{id,jdbcType=VARCHAR}
+  <delete id="deleteCollectionByPlanId" parameterType="java.lang.String">
+    delete from `plan_collection` where plan_id = #{id}
   </delete>
-  <insert id="insert" parameterType="com.lakinm.op.model.entity.PlanCollection" >
-    insert into plan_collection (id, plan_id, collection_id
-      )
-    values (#{id,jdbcType=VARCHAR}, #{planId,jdbcType=VARCHAR}, #{collectionId,jdbcType=VARCHAR}
-      )
+
+  <insert id="insertPlanCollection" parameterType="java.util.List">
+    INSERT INTO `plan_collection`(`id`, `plan_id`, `collection_id`)
+    VALUES
+    <foreach collection="planCollections" separator="," item="item">
+      (#{item.id}, #{item.planId}, #{item.collectionId})
+    </foreach>
   </insert>
-  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.PlanCollection" >
-    insert into plan_collection
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="planId != null" >
-        plan_id,
-      </if>
-      <if test="collectionId != null" >
-        collection_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="planId != null" >
-        #{planId,jdbcType=VARCHAR},
-      </if>
-      <if test="collectionId != null" >
-        #{collectionId,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.PlanCollection" >
-    update plan_collection
-    <set >
-      <if test="planId != null" >
-        plan_id = #{planId,jdbcType=VARCHAR},
-      </if>
-      <if test="collectionId != null" >
-        collection_id = #{collectionId,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.PlanCollection" >
-    update plan_collection
-    set plan_id = #{planId,jdbcType=VARCHAR},
-      collection_id = #{collectionId,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+
+  <select id="selectCollectionByPlanId" parameterType="java.lang.String" resultType="com.lakinm.op.model.dto.PlanCollectionDTO">
+    select a.id, a.plan_id, a.collection_id, b.`name` as collection_name, b.version_id, c.`name` as collection_version
+    from `plan_collection` a
+    LEFT JOIN `collection` b on a.collection_id = b.id
+    LEFT JOIN `version` c on b.version_id = c.id
+    where a.plan_id = #{planId}
+  </select>
 </mapper>

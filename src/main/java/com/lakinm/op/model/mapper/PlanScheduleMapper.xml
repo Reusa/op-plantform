@@ -1,93 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lakinm.op.model.mapper.PlanScheduleMapper" >
-  <resultMap id="BaseResultMap" type="com.lakinm.op.model.entity.PlanSchedule" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="plan_id" property="planId" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
-    <result column="frequency" property="frequency" jdbcType="VARCHAR" />
-    <result column="next_run_time" property="nextRunTime" jdbcType="BIGINT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, plan_id, start_time, frequency, next_run_time
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from plan_schedule
-    where id = #{id,jdbcType=VARCHAR}
+  <insert id="insertSchedule" parameterType="com.lakinm.op.model.entity.PlanSchedule">
+    INSERT INTO `plan_schedule`(`id`, `plan_id`, `start_time`, `frequency`, `next_run_time`)
+    VALUES
+    (#{id}, #{planId}, #{startTime}, #{frequency}, #{nextRunTime})
+  </insert>
+
+  <select id="selectScheduleByPlanId" parameterType="java.lang.String" resultType="com.lakinm.op.model.entity.PlanSchedule">
+    SELECT * FROM `plan_schedule` WHERE plan_id = #{planId}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from plan_schedule
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.lakinm.op.model.entity.PlanSchedule" >
-    insert into plan_schedule (id, plan_id, start_time, 
-      frequency, next_run_time)
-    values (#{id,jdbcType=VARCHAR}, #{planId,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
-      #{frequency,jdbcType=VARCHAR}, #{nextRunTime,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.lakinm.op.model.entity.PlanSchedule" >
-    insert into plan_schedule
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="planId != null" >
-        plan_id,
-      </if>
-      <if test="startTime != null" >
-        start_time,
-      </if>
-      <if test="frequency != null" >
-        frequency,
-      </if>
-      <if test="nextRunTime != null" >
-        next_run_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="planId != null" >
-        #{planId,jdbcType=VARCHAR},
-      </if>
-      <if test="startTime != null" >
-        #{startTime,jdbcType=VARCHAR},
-      </if>
-      <if test="frequency != null" >
-        #{frequency,jdbcType=VARCHAR},
-      </if>
-      <if test="nextRunTime != null" >
-        #{nextRunTime,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lakinm.op.model.entity.PlanSchedule" >
-    update plan_schedule
-    <set >
-      <if test="planId != null" >
-        plan_id = #{planId,jdbcType=VARCHAR},
-      </if>
-      <if test="startTime != null" >
-        start_time = #{startTime,jdbcType=VARCHAR},
-      </if>
-      <if test="frequency != null" >
-        frequency = #{frequency,jdbcType=VARCHAR},
-      </if>
-      <if test="nextRunTime != null" >
-        next_run_time = #{nextRunTime,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lakinm.op.model.entity.PlanSchedule" >
-    update plan_schedule
-    set plan_id = #{planId,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=VARCHAR},
-      frequency = #{frequency,jdbcType=VARCHAR},
-      next_run_time = #{nextRunTime,jdbcType=BIGINT}
-    where id = #{id,jdbcType=VARCHAR}
+
+  <update id="updateScheduleById" parameterType="com.lakinm.op.model.entity.PlanSchedule">
+    UPDATE `plan_schedule` SET `plan_id` = #{planId}, `start_time` = #{startTime}, `frequency` = #{frequency},
+    `next_run_time` = #{nextRunTime} WHERE `id` = #{id}
   </update>
 </mapper>

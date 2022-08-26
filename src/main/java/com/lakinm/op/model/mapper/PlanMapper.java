@@ -1,17 +1,18 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.PlanDTO;
 import com.lakinm.op.model.entity.Plan;
 
+import java.util.List;
+
 public interface PlanMapper {
-    int deleteByPrimaryKey(String id);
+    void insertPlan(Plan plan);
 
-    int insert(Plan record);
+    void updatePlanById(Plan plan);
 
-    int insertSelective(Plan record);
+    void deletePlanById(String planId);
 
-    Plan selectByPrimaryKey(String id);
+    PlanDTO selectPlanById(String planId);
 
-    int updateByPrimaryKeySelective(Plan record);
-
-    int updateByPrimaryKey(Plan record);
+    List<PlanDTO> selectPlanListByCondition(String projectId, String condition);
 }

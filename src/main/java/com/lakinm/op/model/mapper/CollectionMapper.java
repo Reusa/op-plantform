@@ -1,17 +1,18 @@
 package com.lakinm.op.model.mapper;
 
 import com.lakinm.op.model.entity.Collection;
+import com.lakinm.op.model.vo.CollectionVo;
+
+import java.util.List;
 
 public interface CollectionMapper {
-    int deleteByPrimaryKey(String id);
+    void insertCollection(Collection collection);
 
-    int insert(Collection record);
+    void updateCollection(Collection collection);
 
-    int insertSelective(Collection record);
+    void deleteColById(String colId);
 
-    Collection selectByPrimaryKey(String id);
+    CollectionVo selectColDetailById(String colId);
 
-    int updateByPrimaryKeySelective(Collection record);
-
-    int updateByPrimaryKey(Collection record);
+    List<CollectionVo> selectCollectionListByCondition(String projectId, String condition);
 }

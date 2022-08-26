@@ -1,17 +1,14 @@
 package com.lakinm.op.model.mapper;
 
 import com.lakinm.op.model.entity.CollectionCase;
+import com.lakinm.op.model.vo.CollectionCaseVo;
+
+import java.util.List;
 
 public interface CollectionCaseMapper {
-    int deleteByPrimaryKey(String id);
+    void insertObjects(List<CollectionCase> collectionCases);
 
-    int insert(CollectionCase record);
+    void deleteColByColId(String colId);
 
-    int insertSelective(CollectionCase record);
-
-    CollectionCase selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(CollectionCase record);
-
-    int updateByPrimaryKey(CollectionCase record);
+    List<CollectionCaseVo> selectColCasesByColId(String colId);
 }
