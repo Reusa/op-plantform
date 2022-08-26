@@ -2,16 +2,17 @@ package com.lakinm.op.model.mapper;
 
 import com.lakinm.op.model.entity.Version;
 
+import java.util.List;
+
 public interface VersionMapper {
-    int deleteByPrimaryKey(String id);
 
-    int insert(Version record);
+    Version selectVersionByName(String name);
 
-    int insertSelective(Version record);
+    void insertVersion(Version version);
 
-    Version selectByPrimaryKey(String id);
+    void updateVersion(Version version);
 
-    int updateByPrimaryKeySelective(Version record);
+    void deleteVersionById(String versionId);
 
-    int updateByPrimaryKey(Version record);
+    List<Version> selectVersionList(String projectId, String condition);
 }
