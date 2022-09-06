@@ -1,20 +1,13 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.ReportCollectionCaseTransDTO;
 import com.lakinm.op.model.entity.ReportCollectionCaseWeb;
 import com.lakinm.op.model.entity.ReportCollectionCaseWebWithBLOBs;
 
+import java.util.List;
+
 public interface ReportCollectionCaseWebMapper {
-    int deleteByPrimaryKey(String id);
+    List<ReportCollectionCaseTransDTO> selectByReportCaseId(String caseId);
 
-    int insert(ReportCollectionCaseWebWithBLOBs record);
-
-    int insertSelective(ReportCollectionCaseWebWithBLOBs record);
-
-    ReportCollectionCaseWebWithBLOBs selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(ReportCollectionCaseWebWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(ReportCollectionCaseWebWithBLOBs record);
-
-    int updateByPrimaryKey(ReportCollectionCaseWeb record);
+    List<ReportCollectionCaseTransDTO> selectByRccId(String rccId);
 }

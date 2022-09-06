@@ -1,17 +1,14 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.ReportDTO;
 import com.lakinm.op.model.entity.Report;
 
+import java.util.List;
+
 public interface ReportMapper {
-    int deleteByPrimaryKey(String id);
+    ReportDTO selectReportById(String projectId, String reportId);
 
-    int insert(Report record);
+    void deleteReportById(String reportId);
 
-    int insertSelective(Report record);
-
-    Report selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(Report record);
-
-    int updateByPrimaryKey(Report record);
+    List<ReportDTO> selectReports(String projectId, String condition);
 }

@@ -1,14 +1,12 @@
 package com.lakinm.op.controller;
 
 import com.lakinm.op.model.vo.UserVo;
+import com.lakinm.op.request.QueryRequest;
 import com.lakinm.op.response.Result;
 import com.lakinm.op.service.ProjectService;
 import com.lakinm.op.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/project")
@@ -25,5 +23,12 @@ public class ProjectController {
         UserVo userVo = userService.checkToken(token);
         String userId = userVo.getId();
         return projectService.getUserProjects(userId);
+    }
+
+    @PostMapping("/addUserProject")
+    public Result addUserProject(@RequestBody QueryRequest request) {
+        String userId = request.getUserId();
+        String projectId = request.getProjectId();
+        return projectService.addUserProject(userId, projectId);
     }
 }

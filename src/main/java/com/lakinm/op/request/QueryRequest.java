@@ -11,6 +11,7 @@ public class QueryRequest implements Serializable {
     private String moduleId;
     private String createUser;
     private String projectId;
+    private String userId;
 
     private String caseType; // 查找用例时用例类型
     private String collectionId; //查找报告时报告所属集合Id

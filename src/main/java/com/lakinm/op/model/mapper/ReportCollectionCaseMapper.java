@@ -1,17 +1,14 @@
 package com.lakinm.op.model.mapper;
 
+import com.lakinm.op.model.dto.ReportCollectionCaseDTO;
 import com.lakinm.op.model.entity.ReportCollectionCase;
 
+import java.util.List;
+
 public interface ReportCollectionCaseMapper {
-    int deleteByPrimaryKey(String id);
+    ReportCollectionCaseDTO selectColCasesBytaskId(String projectId, String taskId);
 
-    int insert(ReportCollectionCase record);
+    Integer countRccResult(String status, String rccId);
 
-    int insertSelective(ReportCollectionCase record);
-
-    ReportCollectionCase selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(ReportCollectionCase record);
-
-    int updateByPrimaryKey(ReportCollectionCase record);
+    List<ReportCollectionCaseDTO> selectRccByRcId(String rcId);
 }
